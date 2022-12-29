@@ -1,5 +1,5 @@
 <template>
-  <select v-on="listeners" class="custom-select">
+  <select v-bind="listeners" class="custom-select">
     <option
       v-for="item in formatedItems"
       :key="item.value"
@@ -21,7 +21,7 @@
     computed: {
       listeners() {
         return {
-          ...this.$listeners,
+          ...this.$attr,
           input: event => this.$emit('input', event.target.value)
         }
       },

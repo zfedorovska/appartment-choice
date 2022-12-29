@@ -45,7 +45,7 @@ export default {
   computed: {
     listeners() {
       return {
-        ...this.$listeners,
+        ...this.$attr,
         input: (event) => this.$emit('input', event.target.value),
       };
     },
@@ -62,11 +62,7 @@ export default {
 
     this.form.registerInput(this);
   },
-  beforeDestroy() {
-    if (!this.form) return;
 
-    this.form.unRegisterInput(this);
-  },
   methods: {
     validate() {
       this.isValid = this.rules.every((rule) => {

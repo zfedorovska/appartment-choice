@@ -1,44 +1,51 @@
 <template>
   <div :id="$style.app">
-  <AppartmentsList
-  :items="appartments"
-  />
+      <h2>{{ text }}</h2>
+      <ApartmentsFilterForm
+        class="apartments-filter"
+        @submit="logger"/>
+      <ApartmentsList
+  :items="apartments"
+  >
+  <template v-slot:apartment="{ apartment }">
+ 
+      <ApartmentsItem 
+        :key="apartment.id" 
+        :descr="apartment.descr" 
+        :rating="apartment.rating" 
+        :imgSrc="apartment.imgUrl"
+        :price="apartment.price" />
+  </template>
+</ApartmentsList>
   </div>
 </template>
 
 <script>
-import AppartmentsList from './components/appartment/AppartmentsList.vue';
-import appartments from './components/appartment/apartments'
+import ApartmentsList from './components/apartment/ApartmentsList.vue';
+import ApartmentsItem from './components/apartment/ApartmentsItem.vue';
+import apartments from './components/apartment/apartments';
+import ApartmentsFilterForm from './components/apartment/ApartmentsFilterForm.vue';
+
 
 export default {
   name: 'App',
   components: {
-    AppartmentsList,
+    ApartmentsList,
+    ApartmentsItem,
+    ApartmentsFilterForm
   },
   data() {
-    console.log(appartments);
     return {
-      appartments,
-      appartment: {
-        id: '3333444',
-        title: 'Good Place',
-        descr: 'Where you can forget about yourself',
-        price: 2032,
-        location: {
-          city: 'Kostopil',
-        },
-        owner: {
-          name: 'Zoryana',
-          phone: '222-2222-22222',
-          email: 'zfedorovska@gmail.com'
-        },
-        rating: 4,
-      }
+      text: '',
+      apartments,
     }
   },
   computed: {
   },
   methods: {
+    logger(value) {
+      console.log(value, 'form value');
+    }
   }
 }
 </script>
