@@ -1,22 +1,51 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div :id="$style.app">
+  <AppartmentsList
+  :items="appartments"
+  />
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import AppartmentsList from './components/appartment/AppartmentsList.vue';
+import appartments from './components/appartment/apartments'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    AppartmentsList,
+  },
+  data() {
+    console.log(appartments);
+    return {
+      appartments,
+      appartment: {
+        id: '3333444',
+        title: 'Good Place',
+        descr: 'Where you can forget about yourself',
+        price: 2032,
+        location: {
+          city: 'Kostopil',
+        },
+        owner: {
+          name: 'Zoryana',
+          phone: '222-2222-22222',
+          email: 'zfedorovska@gmail.com'
+        },
+        rating: 4,
+      }
+    }
+  },
+  computed: {
+  },
+  methods: {
   }
 }
 </script>
 
-<style>
+<style module>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Montserrat, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
